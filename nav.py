@@ -2,8 +2,37 @@ import tkinter as tk
 from tkinter import messagebox
 import time
 import random
-from music import MusicPlayer
-import pygame, os
+import pygame
+import os
+import customtkinter
+
+# Initialize the mixer module for pygame
+pygame.mixer.init()
+from PIL import Image,ImageTk
+class MusicPlayer:
+    def __init__(self, music_dir):
+        self.music_dir = music_dir
+        self.songs = os.listdir(music_dir)
+        self.current_song = 0
+        self.is_playing = False
+
+    def play_next_song(self):
+        if self.songs:
+            self.current_song = (self.current_song + 1) % len(self.songs)
+            pygame.mixer.music.load(os.path.join(self.music_dir, self.songs[self.current_song]))
+            pygame.mixer.music.play()
+            self.is_playing = True
+
+    def play_pause(self):
+        if self.is_playing:
+            pygame.mixer.music.pause()
+            self.is_playing = False
+        else:
+            if pygame.mixer.music.get_busy():
+                pygame.mixer.music.unpause()
+            else:
+                self.play_next_song()
+            self.is_playing = True
 
 class TicTacToe:
     def __init__(self):
@@ -76,8 +105,8 @@ class SnakeGame:
         SPEED = 200
         SPACE_SIZE = 20
         BODY_SIZE = 2
-        SNAKE = "#00FF00"
-        FOOD = "#FFFFFF"
+        SNAKE = "#E0115F"
+        FOOD = "#FF0000"
         BACKGROUND = "#000000"
 
         class Snake: 
@@ -342,7 +371,7 @@ def helloCallBack():
     global meditation_window
     meditation_window = tk.Toplevel()
     meditation_window.title("Timer")
-    meditation_window.geometry("400x200")
+    meditation_window.geometry("200x200")
     meditation_window.config(bg="#922B21")
     meditation_window.resizable(width=False, height=False)
 
@@ -354,36 +383,104 @@ def helloCallBack():
     meditation_time_entry.place(x=50, y=100)
 
     start_button = tk.Button(meditation_window, text="Start Rest", fg="Black", bg="#D4AC0D", width=15, command=start_meditation, font=(20))
-    start_button.place(x=50, y=150)
+    start_button.place(x=30, y=150)
 
     meditation_window.mainloop()
     
 
-root = tk.Tk()
-root.geometry("400x60")
-root.title("Navigation Bar")
+if __name__ == "__main__":
+    
+    root = customtkinter.CTk(fg_color="#000000")
+    root.title("")
+    root.geometry("140x170")
 
 
 
+    player = MusicPlayer("LazyDays")
+
+    # Function to open Tic Tac Toe game
+    def open_tic_tac_toe():
+        TicTacToe()
+
+    # Function to open Snake Game
+    def open_snake_game():
+        open_game(SnakeGame)
+
+    # Function to open To-Do List
+    def open_todo_list():
+        open_game(TodoList)
+
+    # Load your logo image (replace 'logo.png' with your image path)
+    logo_image = Image.open("clock.jpg")
+    logo_ctk_image = customtkinter.CTkImage(logo_image, size=(30, 30))  # Specify the desired size
+
+    # Create a frame to hold button1 and button2
+    button_frame = tk.Frame(root,background="#000000")
+    button_frame.pack(side=tk.TOP, padx=5, pady=5)
+
+    # Create button1
+    button1 = customtkinter.CTkButton(button_frame, hover_color="#ED849D", text="",
+                                    width=30, height=35, fg_color="#E0115F",
+                                    border_width=2, corner_radius=8,
+                                    border_color=("#444444", "#222222"),
+                                    text_color=("#FFFFFF", "#000000"),
+                                    image=logo_ctk_image, compound="left",command=helloCallBack)  # Place logo on the left
+    button1.pack(side=tk.LEFT,padx=5,pady=5)
+
+    # Load your logo image for button2 (replace 'todo.jpg' with your image path)
+    logo_image2 = Image.open("todo.jpg")
+    logo_todo_image = customtkinter.CTkImage(logo_image2, size=(30, 30))  # Specify the desired size
+
+    # Create button2
+    button2 = customtkinter.CTkButton(button_frame, hover_color="#ED849D", text="",
+                                    width=30, height=35, fg_color="#E0115F",
+                                    border_width=2, corner_radius=8,
+                                    border_color=("#444444", "#222222"),
+                                    text_color=("#FFFFFF", "#000000"),
+                                    image=logo_todo_image, compound="left",command=open_todo_list)  # Place logo on the left
+    button2.pack(side=tk.LEFT, padx=5,pady=5)
+
+    button_frame1 = tk.Frame(root,background="#000000")
+    button_frame1.pack(side=tk.TOP, padx=5, pady=5)
+
+    # Load your logo image for button3 (replace 'todo.jpg' with your image path)
+    logo_image3 = Image.open("music.png")
+    logo_lofi_image = customtkinter.CTkImage(logo_image3, size=(30, 30))  # Specify the desired size
+
+    # Create button3
+    button3 = customtkinter.CTkButton(button_frame1, hover_color="#ED849D", text="",
+                                    width=30, height=35, fg_color="#E0115F",
+                                    border_width=2, corner_radius=8,
+                                    border_color=("#444444", "#222222"),
+                                    text_color=("#FFFFFF", "#000000"),
+                                    image=logo_lofi_image, compound="left",command=player.play_pause)  # Place logo on the left
+    button3.pack(side=tk.LEFT, padx=5, pady=5)
+
+    # Load your logo image for button3 (replace 'todo.jpg' with your image path)
+    logo_image4 = Image.open("tic.jpg")
+    logo_ttt_image = customtkinter.CTkImage(logo_image4, size=(30, 30))  # Specify the desired size
+
+    button4 = customtkinter.CTkButton(button_frame1, hover_color="#ED849D", text="",
+                                    width=30, height=35, fg_color="#E0115F",
+                                    border_width=2, corner_radius=8,
+                                    border_color=("#444444", "#222222"),
+                                    text_color=("#FFFFFF", "#000000"),
+                                    image=logo_ttt_image, compound="left",command=open_tic_tac_toe)  # Place logo on the left
+    button4.pack(side=tk.LEFT, padx=5, pady=5)
 
 
-def open_tic_tac_toe():
-    TicTacToe()
-open_snake_game = lambda: open_game(SnakeGame)
-open_todo_list = lambda: open_game(TodoList)
+    button_frame2 = tk.Frame(root,background="#000000")
+    button_frame2.pack(side=tk.TOP, padx=5, pady=5)
+    # Load your logo image for button3 (replace 'todo.jpg' with your image path)
+    logo_image5 = Image.open("snake.jpg")
+    logo_snake_image = customtkinter.CTkImage(logo_image5, size=(30, 30))  # Specify the desired size
 
-button_tic_tac_toe = tk.Button(root, text="Tic Tac Toe", command=open_tic_tac_toe)
-button_tic_tac_toe.pack(side=tk.LEFT, padx=5)
+    button5 = customtkinter.CTkButton(button_frame2, hover_color="#ED849D", text="",
+                                    width=30, height=35, fg_color="#E0115F",
+                                    border_width=2, corner_radius=8,
+                                    border_color=("#444444", "#222222"),
+                                    text_color=("#FFFFFF", "#000000"),
+                                    image=logo_snake_image, compound="left",command=open_snake_game)  # Place logo on the left
+    button5.pack(side=tk.LEFT, padx=5, pady=5)
 
-button_snake_game = tk.Button(root, text="Snake Game", command=open_snake_game)
-button_snake_game.pack(side=tk.LEFT, padx=5)
-
-button_todo_list = tk.Button(root, text="To-Do List", command=open_todo_list)
-button_todo_list.pack(side=tk.LEFT, padx=5)
-
-button_meditation = tk.Button(root, text="Meditation Timer", command=helloCallBack)
-button_meditation.pack(side=tk.LEFT, padx=5)
-
-
-
-root.mainloop()
+    root.mainloop()
