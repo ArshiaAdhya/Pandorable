@@ -1,8 +1,10 @@
+from tkinter import simpledialog
 import cv2 as cv
 import numpy as np
 import mediapipe as mp
 import math
 import time
+import tkinter as tk
 
 mp_face_mesh = mp.solutions.face_mesh
 
@@ -18,6 +20,30 @@ FOREHEAD_POINT = [101]
 NOSE_TIP = [101]
 CHIN = [152]
 
+class ConfigDialog:
+    def __init__(self, parent):
+        self.parent = parent
+        self.dialog = simpledialog.Dialog(parent, title="Configure Overlay")
+        self.btn_tic_tac_toe = tk.Button(self.dialog, text="Tic Tac Toe", command=self.open_tic_tac_toe)
+        self.btn_tic_tac_toe.pack()
+        self.btn_snake_game = tk.Button(self.dialog, text="Snake Game", command=self.open_snake_game)
+        self.btn_snake_game.pack()
+        self.btn_todo_list = tk.Button(self.dialog, text="To-Do List", command=self.open_todo_list)
+        self.btn_todo_list.pack()
+        self.btn_meditation_timer = tk.Button(self.dialog, text="Break Timer", command=self.open_meditation_timer)
+        self.btn_meditation_timer.pack()
+        self.btn_play_pause_music = tk.Button(self.dialog, text="Play/Pause Music", command=self.play_pause_music)
+        self.btn_play_pause_music.pack()
+
+    def body(self, master):
+        tk.Label(master, text="Background Image:").grid(row=0)
+        self.bg_entry = tk.Entry(master)
+        self.bg_entry.grid(row=0, column=1)
+        return self.bg_entry  
+
+    def apply(self):
+        bg_image = self.bg_entry.get()
+        self.parent.change_background(bg_image)
 
 def euclidean_distance(point1, point2):
     x1, y1 = point1.ravel()
