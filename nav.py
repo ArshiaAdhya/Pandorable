@@ -2,9 +2,12 @@ import tkinter as tk
 from tkinter import messagebox
 import time
 import random
+from music import MusicPlayer
+import pygame, os
+
 class TicTacToe:
-    def __init__(self, root):
-        self.root = root
+    def __init__(self):
+        self.root = tk.Toplevel()  # Create a new Toplevel window
         self.root.title("Tic Tac Toe")
         self.current_player = "X"
         self.board = [["" for _ in range(3)] for _ in range(3)]
@@ -16,18 +19,19 @@ class TicTacToe:
             for j in range(3):
                 self.buttons[i][j] = tk.Button(self.root, text="", font=('Helvetica', 20), width=5, height=2,
                                                 command=lambda i=i, j=j: self.on_click(i, j))
-                self.buttons[i][j].grid(row=i, column=j)
-
+                self.buttons[i][j].grid(row=i, column=j)  # Use grid geometry manager for buttons
+                
+                
     def on_click(self, i, j):
         if self.board[i][j] == "":
             self.buttons[i][j].config(text=self.current_player)
             self.board[i][j] = self.current_player
             if self.check_winner():
                 messagebox.showinfo("Winner", f"Player {self.current_player} wins!")
-                self.reset_board()
+                self.close_window()  # Close window after a player wins
             elif self.check_draw():
                 messagebox.showinfo("Draw", "The game is a draw!")
-                self.reset_board()
+                self.close_window()  # Close window if it's a draw
             else:
                 self.current_player = "O" if self.current_player == "X" else "X"
 
@@ -56,11 +60,14 @@ class TicTacToe:
         for i in range(3):
             for j in range(3):
                 self.buttons[i][j].config(text="")
+                
+    def close_window(self):
+        self.root.destroy()  # Destroy the window when the game ends
 
 class SnakeGame:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Snake Game")
+    def __init__(self):
+        # self.root = root
+        # self.root.title("Snake Game")
         self.start_snake_game()
 
     def start_snake_game(self):
@@ -94,9 +101,9 @@ class SnakeGame:
             def __init__(self): 
 
                 x = random.randint(0, 
-                        (WIDTH / SPACE_SIZE)-1) * SPACE_SIZE 
+                        (WIDTH / SPACE_SIZE)-1) * (SPACE_SIZE) 
                 y = random.randint(0, 
-                        (HEIGHT / SPACE_SIZE) - 1) * SPACE_SIZE 
+                        (HEIGHT / SPACE_SIZE) - 1) * (SPACE_SIZE)
 
                 self.coordinates = [x, y] 
 
@@ -234,9 +241,9 @@ class SnakeGame:
         window.mainloop() 
 
 class TodoList:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("To-Do List")
+    def __init__(self):
+        # self.root = root
+        # self.root.title("To-Do List")
         self.tasks_list = []
         self.counter = 1
         self.TextArea = None
@@ -311,9 +318,9 @@ class TodoList:
             self.TextArea.insert(tk.END, task)
 
 def open_game(game_class):
-    game_root = tk.Tk()
-    game = game_class(game_root)
-    game_root.mainloop()
+    # game_root = tk.Toplevel()
+    game = game_class()
+    # game_root.mainloop()
 
 def start_meditation():
     global meditation_start_time, meditation_time
@@ -333,7 +340,7 @@ def update_timer():
 
 def helloCallBack():
     global meditation_window
-    meditation_window = tk.Tk()
+    meditation_window = tk.Toplevel()
     meditation_window.title("Timer")
     meditation_window.geometry("400x200")
     meditation_window.config(bg="#922B21")
@@ -350,12 +357,18 @@ def helloCallBack():
     start_button.place(x=50, y=150)
 
     meditation_window.mainloop()
+    
 
 root = tk.Tk()
-root.geometry("500x60")
+root.geometry("400x60")
 root.title("Navigation Bar")
 
-open_tic_tac_toe = lambda: open_game(TicTacToe)
+
+
+
+
+def open_tic_tac_toe():
+    TicTacToe()
 open_snake_game = lambda: open_game(SnakeGame)
 open_todo_list = lambda: open_game(TodoList)
 
@@ -370,5 +383,7 @@ button_todo_list.pack(side=tk.LEFT, padx=5)
 
 button_meditation = tk.Button(root, text="Meditation Timer", command=helloCallBack)
 button_meditation.pack(side=tk.LEFT, padx=5)
+
+
 
 root.mainloop()
