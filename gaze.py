@@ -8,7 +8,7 @@ import threading
 import time
 from tkinter import simpledialog
 from nav import TicTacToe, TodoList, SnakeGame, open_game, start_meditation, update_timer, helloCallBack
-
+from music import MusicPlayer
 
 
 class ConfigDialog:
@@ -50,9 +50,9 @@ class OverlayApp:
         self.root.bind("<B1-Motion>", self.on_mouse_drag)
         self.root.bind("<ButtonRelease-1>", self.on_mouse_rel)
         self.change_allowed=True
-        self.image_list = ['panda.jpg', 'pandanorm.jpg', 'pandasleep.jpg', 'pandathirst.jpg']
+        self.image_list = ['panda.jpg','chilling.jpg','reading.jpg', 'talking.jpg', 'pandanorm.jpg', 'pandasleep.jpg', 'pandathirst.jpg']
         self.current_image_index = 0
-        self.iteration_delay = 5
+        self.iteration_delay = 2
         self.iteration_thread = None
         self.start_background_iteration()
         root.bind('<p>', self.on_key_press)
