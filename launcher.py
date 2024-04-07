@@ -1,7 +1,7 @@
 import tkinter as tk
 import keyboard
 import subprocess
-import streamlit as st
+
 
 class ToggleSwitch:
     def __init__(self):
