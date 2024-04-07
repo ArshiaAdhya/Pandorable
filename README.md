@@ -2,7 +2,7 @@
 
 <br />
 <div align="center">
-    <img src="images/logo.png" alt="Logo" width="300" height="300">
+    <img src="logo.png" alt="Logo" width="300" height="300">
 
 
   <h3 align="center">Pandorable: Hack Your Wellness</h3>
@@ -51,7 +51,7 @@ Pandorable, your adorable panda companion designed to simplify your day, offers 
 - **Enhanced GUI:**  Pandorable utilizes a custom tkinter library to create a visually appealing and user-friendly interface that goes beyond the standard look and feel. 
 
 <div align="center">
-    <img src="images/SS.png" alt="Logo" width="300" height="300">
+    <img src="SS.png" alt="Logo" width="300" height="300">
 </div>
 
 
@@ -65,7 +65,7 @@ Pandorable, your adorable panda companion designed to simplify your day, offers 
 - Built-in Break Reminders: Don't let screen fatigue take over! Pandorable gently reminds you to take breaks and offers relaxing activities to keep your mind and body refreshed. From mindful exercises to calming music suggestions curated by a built-in Lofi music player, Pandorable prioritizes your well-being.
 <br>
 <div align="center">
-    <img src="images/pandathirst.jpg" alt="rehydrate" width="100" height="100">
+    <img src="pandathirst.jpg" alt="rehydrate" width="100" height="100">
 </div>
 
 
@@ -78,7 +78,7 @@ Pandorable, your adorable panda companion designed to simplify your day, offers 
 **- Easy Toggling:**  The same keyboard shortcut (Ctrl+Shift+H) acts as a toggle for the entire application. Launch the gaze detector, access the toolbar, and close everything again with this convenient combination.
 
 <div align="center">
-    <img src="images/pandaspook.jpg" alt="rehydrate" width="100" height="100">
+    <img src="pandaspook.jpg" alt="rehydrate" width="100" height="100">
 </div>
 
 Pandorable is your one-stop shop for a balanced and enjoyable digital life. Let this adorable panda companion streamline your day and prioritize your well-being!
