@@ -1,12 +1,13 @@
 import tkinter as tk
 import keyboard
 import subprocess
+import streamlit as st
 
 class ToggleSwitch:
     def __init__(self):
         self.current_process = None
         self.current_process_name = None
-        self.toggle_key = 'o'
+        self.toggle_key = 'ctrl+shift+h' 
         self.toggle_pressed = False
 
     def toggle(self):

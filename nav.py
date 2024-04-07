@@ -27,7 +27,7 @@ class MusicPlayer:
         if self.is_playing:
             pygame.mixer.music.pause()
             self.is_playing = False
-        else:
+        else:                                                     #Pink color code:    # E0115F
             if pygame.mixer.music.get_busy():
                 pygame.mixer.music.unpause()
             else:
@@ -222,7 +222,7 @@ class SnakeGame:
             canvas.create_text(canvas.winfo_width()/2, 
                             canvas.winfo_height()/2, 
                             font=('consolas', 70), 
-                            text="GAME OVER", fill="red", 
+                            text="GAME OVER", fill="#E0115F", 
                             tag="gameover") 
 
         global window, canvas, score, direction
@@ -325,14 +325,14 @@ class TodoList:
         self.todo_window.title("To-Do List")
         self.todo_window.geometry("250x300")
 
-        enterTask = tk.Label(self.todo_window, text="Enter Your Task", bg="light green")
+        enterTask = tk.Label(self.todo_window, text="Enter Your Task", bg="#E0115F")
         self.enterTaskField = tk.Entry(self.todo_window)
-        Submit = tk.Button(self.todo_window, text="Submit", fg="Black", bg="Red", command=self.insertTask)
+        Submit = tk.Button(self.todo_window, text="Submit", fg="Black", bg="#E0115F", command=self.insertTask)
         self.TextArea = tk.Text(self.todo_window, height=5, width=25, font="lucida 13")
-        taskNumber = tk.Label(self.todo_window, text="Delete Task Number", bg="blue")
+        taskNumber = tk.Label(self.todo_window, text="Delete Task Number", bg="#E0115F")
         self.taskNumberField = tk.Entry(self.todo_window)
-        deleteButton = tk.Button(self.todo_window, text="Delete", fg="Black", bg="Red", command=self.delete)
-        exitButton = tk.Button(self.todo_window, text="Exit", fg="Black", bg="Red", command=self.todo_window.destroy)
+        deleteButton = tk.Button(self.todo_window, text="Delete", fg="Black", bg="#E0115F", command=self.delete)
+        exitButton = tk.Button(self.todo_window, text="Exit", fg="Black", bg="#E0115F", command=self.todo_window.destroy)
 
         enterTask.grid(row=0, column=2)
         self.enterTaskField.grid(row=1, column=2, ipadx=50)
@@ -362,7 +362,7 @@ def update_timer():
     current_time = time.time()
     elapsed_time = current_time - meditation_start_time
     if elapsed_time >= meditation_time:
-        meditation_label.config(text="Chlo bhot rest ho gya!")
+        meditation_label.config(text="Enough,it's been a lot,rest!")
     else:
         meditation_label.config(text=f"Time Remaining: {int((meditation_time - elapsed_time) // 60)}:{int((meditation_time - elapsed_time) % 60):02d}")
         meditation_window.after(1000, update_timer)
@@ -484,3 +484,4 @@ if __name__ == "__main__":
     button5.pack(side=tk.LEFT, padx=5, pady=5)
 
     root.mainloop()
+    
